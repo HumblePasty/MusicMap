@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>越剧演出场数全国各省分布圆环图</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<style type="text/css">
+		#canvas-holder{
+				width:30%;
+				margin:0 auto;
+			}
+	</style>
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>越剧演出场数全国部分发达省市分布圆环图<span>The number of performances of Yue Opera is distributed in some developed provinces and cities
+			</span></h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="index.html" title="戏曲简介" target="_blank"><span>戏曲简介</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Chart/201503231564.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+			</div>
+			<div class="htmleaf-demo center">
+			  <a href="line.html">Line Chart</a>
+			 
+			  <a href="bar.html">Bar Chart</a>
+			  <a href="doughnut.html" class="current">Doughnut Chart</a>
+		
+			  <a href="polar-area.html">Polar Area Chart</a>
+			  <a href="radar.html">Radar Area Chart</a>
+			</div>
+		</header>
+		<div class="htmleaf-content">
+			<div id="canvas-holder">
+				<canvas id="chart-area" width="500" height="500"/>
+			</div>
+		</div>
+		
+	</div>
+	
+	<script src="js/Chart.js"></script>
+	<script>
+	var doughnutData = [
+	{
+		value: 2160,
+		color:"#F7464A",
+		highlight: "#FF5A5E",
+		label: "广东省"
+	},
+	{
+		value: 482,
+		color: "#46BFBD",
+		highlight: "#5AD3D1",
+		label: "北京"
+	},
+	{
+		value: 323,
+		color: "#FDB45C",
+		highlight: "#FFC870",
+		label: "上海"
+	},
+	{
+		value: 133,
+		color: "#949FB1",
+		highlight: "#A8B3C5",
+		label: "江苏"
+	},
+	{
+		value: 55,
+		color: "#4D5360",
+		highlight: "#616774",
+		label: "浙江"
+	}
+
+];
+
+window.onload = function(){
+	var ctx = document.getElementById("chart-area").getContext("2d");
+	window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, {responsive : true});
+};
+
+	</script>
+
+</body>
+</html>

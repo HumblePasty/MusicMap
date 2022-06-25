@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>2021年各种戏曲剧团个数</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>2021年各种戏曲剧团个数<span>Number of opera troupes</span></h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="index.html" title="戏曲简介" target="_blank"><span>戏曲简介</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Chart/201503231564.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+			</div>
+			<div class="htmleaf-demo center">
+			  <a href="line.html">Line Chart</a>
+		
+			  <a href="bar.html">Bar Chart</a>
+			  <a href="doughnut.html">Doughnut Chart</a>
+		
+			  <a href="polar-area.html" class="current">Polar Area Chart</a>
+			  <a href="radar.html">Radar Area Chart</a>
+			</div>
+		</header>
+		<div class="htmleaf-content">
+			<div id="canvas-holder" style="width:30%;margin:0 auto;">
+				<canvas id="chart-area" width="300" height="300"/>
+			</div>
+		</div>
+		<div class="related">
+		    <h3>如果你喜欢这个插件，那么你可能也喜欢:</h3>
+		    <a href="http://www.htmleaf.com/jQuery/Chart/20141119527.html">
+			  <img src="related/1.jpg" width="300" alt="html5和jQuery动态饼状图表插件"/>
+			  <h3>html5和jQuery动态饼状图表插件</h3>
+			</a>
+			<a href="http://www.htmleaf.com/jQuery/Chart/20141119524.html">
+			  <img src="related/2.jpg" width="300" alt="jqPlot-扩展性极强的jQuery图表插件"/>
+			  <h3>jqPlot-扩展性极强的jQuery图表插件</h3>
+			</a>
+		</div>
+	</div>
+	
+	<script src="js/Chart.js"></script>
+	<script>
+	var polarData = [
+				{
+					value: 110,
+					color:"#F7464A",
+					highlight: "#FF5A5E",
+					label: "京剧团"
+				},
+				{
+					value: 160,
+					color: "#46BFBD",
+					highlight: "#5AD3D1",
+					label: "豫剧团"
+				},
+				{
+					value: 106,
+					color: "#FDB45C",
+					highlight: "#FFC870",
+					label: "秦腔团"
+				},
+				{
+					value: 78,
+					color: "#7A5DC7",
+					highlight: "#A8B3C5",
+					label: "评剧团"
+				},
+				{
+					value: 72,
+					color: "#4D5360",
+					highlight: "#616774",
+					label: "晋剧团"
+				},
+				{
+					value: 62,
+					color: "#0041C2",
+					highlight: "#008000",
+					label: "越剧团"
+				},
+				{
+					value: 53,
+					color: "#00FFFF",
+					highlight: "#FFFF00",
+					label: "川剧团"
+				},
+				{
+					value: 32,
+					color: "#98FF98",
+					highlight: "#C9BE62",
+					label: "花鼓戏"
+				}
+			];
+
+			window.onload = function(){
+				var ctx = document.getElementById("chart-area").getContext("2d");
+				window.myPolarArea = new Chart(ctx).PolarArea(polarData, {
+					responsive:true
+				});
+			};
+
+
+	</script>
+
+</body>
+</html>

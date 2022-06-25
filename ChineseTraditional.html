@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8' />
+  <title>Test</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
+  <link rel="stylesheet" href="Tradition/css/style.css" />
+  <link rel="stylesheet" href="Tradition/css/menu.css" />
+  <script
+    src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+  <link rel="stylesheet"
+    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+    type="text/css" />
+
+  <style>
+    body {
+      color: #404040;
+      font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 20px;
+      padding: 20px 2px;
+    }
+
+    a {
+      color: #404040;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #101010;
+    }
+
+    .map {
+      position: absolute;
+      left: 0%;
+      width: 100%;
+      top: 0;
+      bottom: 0;
+    }
+
+    .map-overlay-container {
+      z-index: 1;
+      position: absolute;
+      top: 40%;
+      left: 65%;
+      width: 280px;
+      height: 400px;
+      box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      margin: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      border-left: 1px solid rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
+      transform-style: preserve-3d;
+      transform: perspective(800px)
+    }
+
+    h2 {
+      color: #f5f5f5;
+      font-size: 2.5rem;
+      text-align: center;
+      font-family: 'Acme', sans-serif;
+    }
+
+    p {
+      color: #ccc;
+      margin: 20px 10px;
+      font-family: 'Fira Code', monospace;
+    }
+
+    small {
+      color: #ccc;
+      margin: 20px 10px;
+      font-family: 'Fira Code', monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- map entry -->
+  <div id='map' class='map pad2'></div>
+  <div class='map-overlay-container'>
+    <div class="description">
+      <h2 id='location-title'>城市的声音</h2>
+      <br>
+      <p id='mdzz'>每个城市都有不同的声音，这些声音里，溢出的不仅是幸福、爱情和梦想，还有千千万万人的青春。</p>
+    </div>
+  </div>
+  <div class="menu-wrap" style="z-index: 2;">
+    <input type="checkbox" class="toggler" />
+    <div class="hamburger">
+      <div></div>
+    </div>
+    <div class="menu">
+      <div>
+        <ul>
+          <li><a href="http://www.kuwo.cn/play_detail/988083" id=m1>1.地区曲目</a></li>
+          <li><a href="http://www.kuwo.cn/play_detail/40773052" id=m2>2.地区曲目</a></li>
+          <li><a href="http://www.kuwo.cn/play_detail/47645001" id=m3>3.地区曲目</a></li>
+          <li><a href="http://www.kuwo.cn/play_detail/6763628" id=m4>4.地区曲目</a></li>
+          <li><a href="http://www.kuwo.cn/play_detail/160373139" id=m5>5.地区曲目</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiemVuYyIsImEiOiJja3g4OW9ydm0yamxzMm9wbjdmM2Y4ZnV3In0.0dL8-UtQlgoInW5bG9SQ5A';
+
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+    });
+    var map = new mapboxgl.Map({
+      container: 'map',
+      // style: 'mapbox://styles/mapbox/streets-v9',
+      // style that uses a GeoJSON datasource "cj64in9zo1ksx32mr7ke3g7vb"
+      style: 'mapbox://styles/zenc/ckxofq633pl3614jm3w6wks6c',  // amia-lowres-style
+      zoom: 3.7,
+      center: [112.755, 38.165]
+    })
+      .addControl(new mapboxgl.NavigationControl())
+      .addControl(new mapboxgl.AttributionControl({ compact: true }))
+      .addControl(geocoder, 'top-left');
+
+
+    map.on('load', function (e) {
+      // add layer to color the raw source data
+      map.addLayer({
+        'id': 'municipalities',
+        "type": "fill",
+        "source": "composite",
+        "source-layer": "China",
+        "layout": {},
+        "paint": {
+          "fill-opacity": 0
+        }
+      });
+
+      // add a conditional layer to play over the source data on hover event
+      map.addLayer({
+        "id": "state-fills-hover",
+        "type": "fill",
+        "source": "composite",
+        "source-layer": "China",
+        "layout": {},
+        "paint": {
+          "fill-color": "#99FF99",
+          "fill-opacity": 0.1
+        },
+        "filter": ["==", "name", ""]
+      });
+
+
+      // display coordinates on mouse hover, for the layer "municipalities"
+      map.on('mousemove', 'municipalities', function (e) {
+        //document.getElementById('listings').innerHTML = JSON.stringify(e.point) + "<br>" + JSON.stringify(e.lngLat);
+        map.setFilter("state-fills-hover", ["==", "name", e.features[0].properties.name]);
+      });
+
+      // display municipality name on mouse-click
+      map.on('click', 'municipalities', function (e) {
+        let c = e.features[0].properties.center;
+        var d = c.indexOf(",");
+        var c_1 = c.slice(1, d);
+        var c_2 = c.slice(d + 1, -2);
+        c_1 = parseFloat(c_1);
+        c_2 = parseFloat(c_2);
+        var c_ = [c_1, c_2];
+        //console.log(c.length);
+        map.flyTo({
+          center: c_,
+          zoom: 8
+        });
+
+        // print all data
+        var content = "";
+        for (key in e.features[0].properties) {
+          content += key + ": " + e.features[0].properties[key];
+          content += "<br>";
+        }
+
+        var _m1 = document.getElementById("m1");
+        var _m2 = document.getElementById("m2");
+        var _m3 = document.getElementById("m3");
+        var _m4 = document.getElementById("m4");
+        var _m5 = document.getElementById("m5");
+
+        console.log(_m1);
+        if (e.features[0].properties.name == '湖北省') {
+          content = "湖北地处中国南北交界地带，其文化和音乐均有不南不北，亦南亦北的中性色调，由此形成其独特的个性。千里江汉平原潜江县的打麦歌《崔冬崔》，即是典型的中音色彩曲例，全曲以大宫声韵135三音腔及其各种转位、换序形态行腔，曲风明朗活泼，刚柔兼容。湖北宜昌山歌〈上茶山〉，亦具中音色彩，旋律音调与上曲大同小异，更添一股清新的山野风韵。"
+          _m1.innerHTML = "1.大武汉";
+          _m1.setAttribute('href', 'http://www.kuwo.cn/play_detail/5109400');
+          _m2.innerHTML = "2.武汉爱情故事";
+          _m2.setAttribute('href', 'http://www.kuwo.cn/play_detail/7060832');
+          _m3.innerHTML = "3.六渡桥";
+          _m3.setAttribute('href', 'http://www.kuwo.cn/play_detail/59501804');
+          _m4.innerHTML = "4.醉赤壁";
+          _m4.setAttribute('href', 'http://www.kuwo.cn/play_detail/438658');
+          _m5.innerHTML = "5.下一站茶山刘";
+          _m5.setAttribute('href', 'http://www.kuwo.cn/play_detail/30352567');
+        }
+        console.log(_m1);
+        if (e.features[0].properties.name == '山东省') {
+          content = "山东民歌具有粗犷、豪放的特点，这一特点在山东民歌中的各种号子中表现尤为明显。儿歌、说唱性民歌以及一些大型民间套曲大部分是由当地故事趣闻填写而成，更能引起当地人们的兴趣，这也就是山东民歌的第二大特点：诙谐、幽默。除了上面所说的两大特点，山东民歌的第三大特点就是质朴、淳厚。"
+          _m1.innerHTML = "1.济南的夜";
+          _m1.setAttribute('href', 'http://www.kuwo.cn/play_detail/12576471');
+          _m2.innerHTML = "2.济南姑娘";
+          _m2.setAttribute('href', 'http://www.kuwo.cn/play_detail/8240670');
+          _m3.innerHTML = "3.青岛";
+          _m3.setAttribute('href', 'http://www.kuwo.cn/play_detail/51801283');
+          _m4.innerHTML = "4.梦回老济南";
+          _m4.setAttribute('href', 'http://www.kuwo.cn/play_detail/28104656');
+          _m5.innerHTML = "5.日照海天";
+          _m5.setAttribute('href', 'http://www.kuwo.cn/play_detail/5843732');
+        }
+        if (e.features[0].properties.name == '河北省') {
+          content = "河北民歌，是一种古老的汉族民族音乐。是具有质朴、淳厚，或悲壮凄凉，或婉转动听等特点。表现河北省各民族劳动人民朴实、淳厚的性情。多以描绘现实生活，也有一部分是歌颂历史人物的。燕赵大地多慷慨悲歌之士，亦不乏慷慨悲歌。";
+          _m1.innerHTML = "1.北戴河之歌";
+          _m1.setAttribute('href', 'http://www.kuwo.cn/play_detail/988083');
+          _m2.innerHTML = "2.承德之歌";
+          _m2.setAttribute('href', 'http://www.kuwo.cn/play_detail/40773052');
+          _m3.innerHTML = "3.唐山大实话";
+          _m3.setAttribute('href', 'http://www.kuwo.cn/play_detail/47645001');
+          _m4.innerHTML = "4.飞翔石家庄";
+          _m4.setAttribute('href', 'http://www.kuwo.cn/play_detail/6763628');
+          _m5.innerHTML = "5.下一站茶山刘";
+          _m5.setAttribute('href', 'http://www.kuwo.cn/play_detail/160373139');
+        }
+        //obj.innerHTML=content;
+        console.log(content);
+        var obj = document.getElementById("mdzz");
+        var obj2 = document.getElementById("location-title");
+        obj.innerHTML = content;
+        obj2.innerHTML = e.features[0].properties.name;
+      });
+    });
+  </script>
+</body>
+
+</html>

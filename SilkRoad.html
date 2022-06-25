@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>MusicMap 聆听丝绸之路</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            top: 0;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+        }
+
+        #header {
+            margin: auto;
+            width: 100%;
+            position: relative;
+            z-index: 5;
+        }
+
+        #header h1,
+        #header h2,
+        #header p {
+            margin: 0;
+            padding: 2vh 2vw;
+            text-align: center;
+            color: #f4f5f3
+        }
+
+        #footer {
+            width: 100%;
+            min-height: 5vh;
+            padding-top: 2vh;
+            padding-bottom: 2vh;
+            text-align: center;
+            line-height: 25px;
+            font-size: 13px;
+            position: relative;
+            z-index: 5;
+        }
+
+        #features {
+            padding-top: 10vh;
+            padding-bottom: 10vh;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+
+        .centered {
+            width: 50vw;
+            margin: 0 auto;
+        }
+
+        .lefty {
+            width: 33vw;
+            margin-left: 5vw;
+        }
+
+        .righty {
+            width: 33vw;
+            margin-left: 80vw;
+        }
+
+        .fully {
+            width: 100%;
+            margin: auto;
+        }
+
+        .light {
+            color: #444;
+            background-color: #fafafa;
+        }
+
+        .dark {
+            z-index: 5;
+            width: 200px;
+            box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            transform-style: preserve-3d;
+            transform: perspective(800px)
+        }
+
+        .step {
+            padding-bottom: 50vh;
+            /* margin-bottom: 10vh; */
+            opacity: 0.25;
+        }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        .step div {
+            padding: 25px 50px;
+            line-height: 25px;
+            font-size: 13px;
+        }
+
+        .step img {
+            width: 100%;
+        }
+
+        @media (max-width: 750px) {
+
+            .centered,
+            .lefty,
+            .righty,
+            .fully {
+                width: 90vw;
+                margin: 0 auto;
+            }
+        }
+
+        /* Fix issue on mobile browser where scroll breaks  */
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan,
+        .mapboxgl-canvas-container.mapboxgl-touch-zoom-rotate.mapboxgl-touch-drag-pan .mapboxgl-canvas {
+            touch-action: unset;
+        }
+
+        h3 {
+            color: #f4f5f3;
+            font-size: 2.5rem;
+            text-align: center;
+            font-family: 'Acme', sans-serif;
+        }
+
+
+        a:link,
+        a:visited,
+        a:active {
+            color: #f4f5f3;
+            font-size: 1rem;
+            /* margin: 20px 10px;
+            font-family: 'Fira Code', monospace; */
+            text-decoration: none;
+        }
+    </style>
+
+    <link rel="stylesheet" href="City Music/css/style.css">
+    <link rel="stylesheet" href="City Music/css/style1.css">
+    <link rel="stylesheet" href="City Music/css/bootstrap.min.css">
+    <link rel="stylesheet" href="City Music/css/fl-bigmug-line.css">
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
+
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- .site-mobile-menu -->
+    <div class="site-wrap">
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+
+        <div class="site-navbar-wrap bg-white">
+            <div class="site-navbar-top">
+                <div class="container py-2">
+                    <div class="row align-items-center">
+                        <div class="col-6 col-md-6 col-lg-2">
+                            <a href="" class="d-flex align-items-center site-logo">
+                                <span class="fl-bigmug-line-cube29 mr-3 cube-bg"></span>
+                                <span>MusicMap</span>
+                            </a>
+                        </div>
+
+                        <div class="col-6 col-md-6 col-lg-10">
+                            <ul class="unit-4 ml-auto text-right">
+
+                                <li class="text-left">
+                                    <a href="#">
+                                        <div class="d-flex align-items-center block-unit">
+                                            <div class="icon mr-0 mr-md-4">
+                                                <span class="fl-bigmug-line-headphones32 h3"></span>
+                                            </div>
+                                            <div class="d-none d-lg-block">
+                                                <span class="d-block text-gray-500 text-uppercase">联系我们</span>
+                                                <span class="h6">1-234-200-3911</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="text-left">
+                                    <a href="#">
+                                        <div class="d-flex align-items-center block-unit">
+                                            <div class="icon mr-0 mr-md-4">
+                                                <span class="fl-bigmug-line-email64 h5"></span>
+                                            </div>
+                                            <div class="d-none d-lg-block">
+                                                <span class="d-block text-gray-500 text-uppercase">邮件往来</span>
+                                                <span class="h6">mail@whu.edu.com</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li class="text-left">
+                                    <a href="#">
+                                        <div class="d-flex align-items-center block-unit">
+                                            <div class="icon mr-0 mr-md-4">
+                                                <span class="fl-bigmug-line-chat55 h2"></span>
+                                            </div>
+                                            <div class="d-none d-lg-block">
+                                                <span class="d-block text-gray-500 text-uppercase">在线交流</span>
+                                                <span class="h6">Chat With Us Now</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="site-navbar bg-dark">
+                <div class="container py-1">
+                    <div class="row align-items-center">
+
+                        <div class="col-4 col-md-4 col-lg-8">
+                            <nav class="site-navigation text-left" role="navigation">
+                                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#"
+                                        class="site-menu-toggle js-menu-toggle text-white"><span
+                                            class="icon-menu h3"></span></a></div>
+
+                                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                                    <li> <a href="City Music.html">城市脉搏</a> </li>
+                                    <li class="active"><a href="SilkRoad.html">丝绸之路</a></li>
+                                    <li class="has-children"> <a href="#">戏曲人生</a>
+                                        <ul class="dropdown arrow-top">
+                                            <li><a href="Opera Introduction.html">前世今生</a></li>
+                                            <li><a href="Opera Distribution.html">戏曲散落</a></li>
+                                            <li class="has-children">
+                                                <a href="#">前路寻觅</a>
+                                                <ul class="dropdown">
+                                                    <li><a href="Line.html">戏曲演出场数</a></li>
+                                                    <li><a href="Bar.html">京剧演出分布</a></li>
+                                                    <li><a href="Doughnut.html">越剧演出分布</a></li>
+                                                    <li><a href="Polar-area.html">戏曲剧团</a></li>
+                                                    <li><a href="Radar.html">京剧VS越剧</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="Popular.html">寰宇风尚</a></li>
+                                    <li><a href="Concert.html">音乐狂欢</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-8 col-md-8 col-lg-4 text-right">
+                            <a href="register.html" class="btn btn-white btn-outline-white rounded-0 py-2 px-4">注册</a>
+                            <a href="register.html" class="btn btn-white btn-outline-white rounded-0 py-2 px-4">登录</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="map"></div>
+    <div id="story"></div>
+    <script src="Silk Road/config.js"></script>
+    <script>
+        var layerTypes = {
+            'fill': ['fill-opacity'],
+            'line': ['line-opacity'],
+            'circle': ['circle-opacity', 'circle-stroke-opacity'],
+            'symbol': ['icon-opacity', 'text-opacity'],
+            'raster': ['raster-opacity'],
+            'fill-extrusion': ['fill-extrusion-opacity'],
+            'heatmap': ['heatmap-opacity']
+        }
+
+        var alignments = {
+            'left': 'lefty',
+            'center': 'centered',
+            'right': 'righty',
+            'full': 'fully'
+        }
+
+        function getLayerPaintType(layer) {
+            var layerType = map.getLayer(layer).type;
+            return layerTypes[layerType];
+        }
+
+        function setLayerOpacity(layer) {
+            var paintProps = getLayerPaintType(layer.layer);
+            paintProps.forEach(function (prop) {
+                var options = {};
+                if (layer.duration) {
+                    var transitionProp = prop + "-transition";
+                    options = { "duration": layer.duration };
+                    map.setPaintProperty(layer.layer, transitionProp, options);
+                }
+                map.setPaintProperty(layer.layer, prop, layer.opacity, options);
+            });
+        }
+
+        var story = document.getElementById('story');
+        var features = document.createElement('div');
+        features.setAttribute('id', 'features');
+
+        var header = document.createElement('div');
+
+        if (config.title) {
+            var titleText = document.createElement('h1');
+            titleText.innerText = config.title;
+            header.appendChild(titleText);
+        }
+
+        if (config.subtitle) {
+            var subtitleText = document.createElement('h2');
+            subtitleText.innerText = config.subtitle;
+            header.appendChild(subtitleText);
+        }
+
+        if (config.byline) {
+            var bylineText = document.createElement('p');
+            bylineText.innerText = config.byline;
+            header.appendChild(bylineText);
+        }
+
+        if (header.innerText.length > 0) {
+            header.classList.add(config.theme);
+            header.setAttribute('id', 'header');
+            story.appendChild(header);
+        }
+
+        config.chapters.forEach((record, idx) => {
+            var container = document.createElement('div');
+            var chapter = document.createElement('div');
+
+            if (record.title) {
+                var title = document.createElement('h3');
+                title.innerText = record.title;
+                chapter.appendChild(title);
+            }
+
+            if (record.image) {
+                var image = new Image();
+                image.src = record.image;
+                chapter.appendChild(image);
+            }
+
+            if (record.description) {
+                var story = document.createElement('p');
+                story.innerHTML = record.description;
+                chapter.appendChild(story);
+            }
+
+            container.setAttribute('id', record.id);
+            container.classList.add('step');
+            if (idx === 0) {
+                container.classList.add('active');
+            }
+
+            chapter.classList.add(config.theme);
+            container.appendChild(chapter);
+            container.classList.add(alignments[record.alignment] || 'centered');
+            if (record.hidden) {
+                container.classList.add('hidden');
+            }
+            features.appendChild(container);
+        });
+
+        story.appendChild(features);
+
+        var footer = document.createElement('div');
+
+        if (config.footer) {
+            var footerText = document.createElement('p');
+            footerText.innerHTML = config.footer;
+            footer.appendChild(footerText);
+        }
+
+        if (footer.innerText.length > 0) {
+            footer.classList.add(config.theme);
+            footer.setAttribute('id', 'footer');
+            story.appendChild(footer);
+        }
+
+        mapboxgl.accessToken = config.accessToken;
+
+        const transformRequest = (url) => {
+            const hasQuery = url.indexOf("?") !== -1;
+            const suffix = hasQuery ? "&pluginName=scrollytellingV2" : "?pluginName=scrollytellingV2";
+            return {
+                url: url + suffix
+            }
+        }
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: config.style,
+            center: config.chapters[0].location.center,
+            zoom: config.chapters[0].location.zoom,
+            bearing: config.chapters[0].location.bearing,
+            pitch: config.chapters[0].location.pitch,
+            interactive: false,
+            transformRequest: transformRequest
+        });
+
+        if (config.showMarkers) {
+            var marker = new mapboxgl.Marker({ color: config.markerColor });
+            marker.setLngLat(config.chapters[0].location.center).addTo(map);
+        }
+
+        // instantiate the scrollama
+        var scroller = scrollama();
+
+        map.on("load", function () {
+            if (config.use3dTerrain) {
+                map.addSource('mapbox-dem', {
+                    'type': 'raster-dem',
+                    'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+                    'tileSize': 512,
+                    'maxzoom': 14
+                });
+                // add the DEM source as a terrain layer with exaggerated height
+                map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+
+                // add a sky layer that will show when the map is highly pitched
+                map.addLayer({
+                    'id': 'sky',
+                    'type': 'sky',
+                    'paint': {
+                        'sky-type': 'atmosphere',
+                        'sky-atmosphere-sun': [0.0, 0.0],
+                        'sky-atmosphere-sun-intensity': 15
+                    }
+                });
+            };
+
+            // setup the instance, pass callback functions
+            scroller
+                .setup({
+                    step: '.step',
+                    offset: 0.5,
+                    progress: true
+                })
+                .onStepEnter(response => {
+                    var chapter = config.chapters.find(chap => chap.id === response.element.id);
+                    response.element.classList.add('active');
+                    map[chapter.mapAnimation || 'flyTo'](chapter.location);
+                    if (config.showMarkers) {
+                        marker.setLngLat(chapter.location.center);
+                    }
+                    if (chapter.onChapterEnter.length > 0) {
+                        chapter.onChapterEnter.forEach(setLayerOpacity);
+                    }
+                    if (chapter.callback) {
+                        window[chapter.callback]();
+                    }
+                    if (chapter.rotateAnimation) {
+                        map.once('moveend', function () {
+                            const rotateNumber = map.getBearing();
+                            map.rotateTo(rotateNumber + 90, {
+                                duration: 24000, easing: function (t) {
+                                    return t;
+                                }
+                            });
+                        });
+                    }
+                })
+                .onStepExit(response => {
+                    var chapter = config.chapters.find(chap => chap.id === response.element.id);
+                    response.element.classList.remove('active');
+                    if (chapter.onChapterExit.length > 0) {
+                        chapter.onChapterExit.forEach(setLayerOpacity);
+                    }
+                });
+        });
+
+        // setup resize event
+        window.addEventListener('resize', scroller.resize);
+
+    </script>
+
+
+    <script src="City Music/js/jquery-3.3.1.min.js"></script>
+    <script src="City Music/js/bootstrap.min.js"></script>
+    <script src="City Music/js/owl.carousel.min.js"></script>
+    <script src="City Music/js/jquery.magnific-popup.min.js"></script>
+    <script src="City Music/js/aos.js"></script>
+    <script src="City Music/js/main.js"></script>
+</body>
+
+</html>

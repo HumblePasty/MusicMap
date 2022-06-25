@@ -1,0 +1,262 @@
+.wrap {
+	width: 900px;
+	margin: 0 auto;
+	position: relative;
+}
+
+#left {
+	width: 30%;
+	height: 500px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#right {
+	width: 70%;
+	height: 500px;
+	position: absolute;
+	top: 0;
+	right: 50px;
+}
+
+body,
+ul,
+li {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #333;
+}
+
+div.audio {
+	position: relative;
+	top: 150px;
+	left: 100px;
+	background: #eee;
+	width: 400px;
+	height: 400px;
+	transition: all 0.3s;
+	box-shadow: 33px 24px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+div.colorizer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 400px;
+	height: 400px;
+	transition: all 0.3s;
+	z-index: 3;
+}
+
+div.echolizer {
+	background: #fff;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	z-index: 10;
+	width: 0;
+	height: 4px;
+	transition: all 0.3s;
+}
+
+div.audio img {
+	width: 400px;
+}
+
+div.disk {
+	background-image: url("../img/cd.png");
+	width: 350px;
+	height: 350px;
+	position: absolute;
+	right: -140px;
+	background-size: cover;
+	z-index: -1;
+	top: 34px;
+	-webkit-animation: rotating 2s linear infinite;
+	-moz-animation: rotating 2s linear infinite;
+	-ms-animation: rotating 2s linear infinite;
+	-o-animation: rotating 2s linear infinite;
+	animation: rotating 2s linear infinite;
+	border-radius: 50%;
+}
+
+@-webkit-keyframes rotating
+
+/* Safari and Chrome */
+	{
+	from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes rotating {
+	from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+
+	to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+@font-face {
+	font-family: Amatic SC;
+	src: url(AmaticSC-Regular.ttf);
+}
+
+
+#svg-container {
+	position: relative;
+	width: 180px;
+	height: 110px;
+	margin: 40vh auto 0 auto;
+}
+
+#svg-canvas {
+	position: relative;
+	width: 360px;
+	height: 110px;
+}
+
+
+.title {
+	stroke-dasharray: 500;
+	stroke-dashoffset: 500;
+	animation: draw 5s linear forwards;
+	-webkit-animation: draw 8s linear forwards;
+	-moz-animation: draw 8s linear forwards;
+	-o-animation: draw 8s linear forwards;
+	font-weight: bold;
+	font-family: Amatic SC;
+	-inkscape-font-specification: Amatic SC Bold"
+
+}
+
+@keyframes draw {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@-webkit-keyframes draw {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@-moz-keyframes draw {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+@-o-keyframes draw {
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+
+a {
+	border: 0 none;
+	text-decoration: none;
+}
+
+#social-icon-container {
+	position: relative;
+	width: 140px;
+	height: 32px;
+	margin: 0 auto 0 auto;
+	z-index: 0;
+	text-decoration: none;
+	padding-left: 200px;
+}
+
+#social-icon-container img {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	margin-top: 3vh;
+	padding-left: 5px;
+	z-index: 0;
+}
+
+#social-icon-container-hover {
+	position: relative;
+	width: 140px;
+	height: 32px;
+	margin: -32px auto 0 auto;
+	z-index: 1;
+	opacity: .0;
+	text-decoration: none;
+	padding-left: 200px;
+}
+
+#social-icon-container-hover:hover {
+	position: relative;
+	width: 140px;
+	height: 32px;
+	margin: -32px auto 0 auto;
+	z-index: 1;
+	opacity: 1;
+	text-decoration: none;
+}
+
+#social-icon-container-hover img {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	margin-top: 3vh;
+	padding-left: 5px;
+	z-index: 1;
+	opacity: .0;
+	text-decoration: none;
+}
+
+#social-icon-container-hover img:hover {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	margin-top: 3vh;
+	padding-left: 5px;
+	z-index: 1;
+	opacity: 1;
+	text-decoration: none;
+}
+
+#btn {
+	border: 2;
+	border-color: white;
+	color:whitesmoke;
+	font-size: 24px;
+	font-family:'Courier New', Courier, monospace;
+	background-color: #333;
+	cursor: pointer;
+	overflow: hidden;	
+	border-radius: 12px;
+
+
+}

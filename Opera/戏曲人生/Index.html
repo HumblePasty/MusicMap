@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>六大戏曲简介</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" /><!--CSS RESET-->
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css"><!--演示页面样式，使用时可以不引用-->
+	<link rel="stylesheet" href="css/style.css">
+	
+	<script>
+	document.addEventListener('click', function () {
+		document.getElementById('audios').play()
+		})
+	</script>
+</head>
+<body>
+	
+	<audio autoplay="autopaly" loop="loop" id="audios">
+		<source src="jingjv.mp3" type="audio/mp3" />
+	</audio>
+	<div id="app" data-state="0">
+		
+		  <div class="ui-big-images">    
+		    <div class="ui-big-image" data-key="0">
+		      <img src="img/image1.jpg" alt=""/>
+		    </div>
+		    <div class="ui-big-image" data-key="1">
+		      <img src="img/image2.jpg" alt=""/>
+		    </div>
+		    <div class="ui-big-image" data-key="2">
+		      <img src="img/image3.jpg" alt=""/>
+		    </div>
+		    <div class="ui-big-image" data-key="3">
+		      <img src="img/image4.jpg" alt=""/>
+		    </div>
+		    <div class="ui-big-image" data-key="4">
+		      <img src="img/image5.jpg" alt=""/>
+		    </div>
+		    <div class="ui-big-image" data-key="5">
+		      <img src="img/image6.jpg" alt=""/>
+		    </div>
+		  </div>
+		  <div class="ui-thumbnails">
+		    <div class="ui-thumbnail" tabindex="-1" data-key="0">
+		      <img src="img/image1.jpg" alt="" />
+		      <div class="ui-cuticle" data-flip-key="cuticle"></div>
+		    </div>
+		    <div class="ui-thumbnail" tabindex="-1" data-key="1">
+		      <img src="img/image2.jpg" alt="" />
+		      <div class="ui-cuticle" data-flip-key="cuticle"></div>
+		    </div>
+		    <div class="ui-thumbnail" tabindex="-1" data-key="2">
+		      <img src="img/image3.jpg" alt="" />
+		      <div class="ui-cuticle" data-flip-key="cuticle"></div>
+		    </div>
+		    <div class="ui-thumbnail" tabindex="-1" data-key="3">
+		      <img src="img/image4.jpg" alt=""/>
+		      <div class="ui-cuticle" data-flip-key="cuticle"></div>
+		    </div>
+		    <div class="ui-thumbnail" tabindex="-1" data-key="4">
+		      <img src="img/image5.jpg" alt="" />
+		      <div class="ui-cuticle" data-flip-key="cuticle"></div>
+		    </div>
+		    <div class="ui-thumbnail" tabindex="-1" data-key="5">
+		      <img src="img/image6.jpg" alt="" />
+		      <div class="ui-cuticle" data-flip-key="cuticle"></div>
+		    </div>
+		  </div>
+		  <div class="ui-content">
+		    
+		    <nav class="ui-nav">
+		      <button id="prev" tabindex="-1" title="Previous">&lt;</button>
+		      <button id="next" tabindex="-1" title="Next">&gt;</button>
+		    </nav>
+		    
+		    <div class="ui-articles">
+		      <article class="ui-article" data-key="0">
+		        <h2 class="ui-heading">京剧</h2>
+		        <p class="ui-paragraph">京剧流播全国，影响甚广，有“国剧”之称。以梅兰芳命名的京剧表演体系被视为东方戏剧表演体系的代表，为世界三大表演体系之一。京剧是中华民族传统文化的重要表现形式，其中的多种艺术元素被用作中国传统文化的象征符号。京剧的角色分为生、旦、净、丑、杂、武、流等行当，各行当都有一套表演程式，唱念做打的技艺各具特色。代表曲目有《玉堂春》、《长坂坡》、《群英会》、《霸王别姬》等</p>
+		      </article>
+		      <article class="ui-article" data-key="1">
+		        <h2 class="ui-heading">越剧</h2>
+		        <p class="ui-paragraph">发源于浙江嵊州，发祥于上海，繁荣于全国，流传于世界，在发展中汲取了昆曲、话剧、绍剧等特色剧种之大成，经历了由男子越剧到女子越剧为主的历史性演变。越剧长于抒情，以唱为主，声音优美动听，表演真切动人，唯美典雅，极具江南灵秀之气；多以“才子佳人”题材为主，艺术流派纷呈，公认的就有十三大流派之多。代表曲目有《双珠凤》、《祥林嫂》、《梁山伯与祝英台》等
+				</p>
+		      </article>
+		      <article class="ui-article" data-key="2">
+		        <h2 class="ui-heading">黄梅戏</h2>
+		        <p class="ui-paragraph">黄梅戏为安徽主要的地方戏曲剧种和全国知名的大剧种。由山歌、秧歌、茶歌、采茶灯、花鼓调，先于农村，后入城市，逐步形成发展起来的一个剧种。它吸收了青阳腔、徽调、高腔、采茶戏、京剧等众多剧种的因素，逐渐形成了自己的艺术特点。
+					黄梅戏唱腔淳朴流畅，以明快抒情见长，具有丰富的表现力；表演质朴细致，以真实活泼著称。代表曲目有《天仙配》、《女驸马》、《罗帕记》等 </p>
+		      </article>
+		      <article class="ui-article" data-key="3">
+		        <h2 class="ui-heading">豫剧</h2>
+		        <p class="ui-paragraph">发源于河南开封，是我国最大的地方剧种，居全国各地方戏曲之首。豫剧是在河南梆子的基础上不断继承、改革和创新发展起来的。与京剧、黄梅戏、评剧、越剧并称中国五大剧种，汉族戏曲之一，中国第一大地方剧种，被西方人称赞是“东方咏叹调”，“中国歌剧”等。豫剧以唱腔铿锵大气、抑扬有度、行腔酣畅、吐字清晰、韵味醇美、生动活泼、有血有肉、善于表达人物内心情感著称。代表曲目有《对花枪》、《三上桥》、《穆桂英挂帅》等
+				</p>
+		      </article>
+		      <article class="ui-article" data-key="4">
+		        <h2 class="ui-heading">昆曲</h2>
+		        <p class="ui-paragraph">原名“昆山腔”，是中国古老的戏曲声腔、剧种，现又被称为“昆剧”。昆曲是汉族传统戏曲中最古老的剧种之一，也是中国汉族传统文化艺术，特别是戏曲艺术中的珍品，被称为百花园中的一朵“兰花”。昆曲发源于14世纪中国的苏州昆山，后经改良而走向全国，自明代中叶以来独领中国剧坛近300年。昆曲糅合了唱念做打、舞蹈及武术等，以曲词典雅、行腔婉转、表演细腻著称，是被誉为“百戏之祖”的南戏系统下之一的曲种。代表曲目有《玉簪记》、《牡丹亭》、《单刀会》等
+				</p>
+		      </article>
+		      <article class="ui-article" data-key="5">
+		        <h2 class="ui-heading">秦腔</h2>
+		        <p class="ui-paragraph">别称“梆子腔”，中国汉族最古老的戏剧之一，起于西周，源于西府成熟于秦。国家级非物质文化遗产之一。古时陕西、甘肃一带属秦国，所以称之为“秦腔”。因为早期秦腔演出时，常用枣木梆子敲击伴奏，故又名“梆子腔”。秦腔成形后，流传全国各地，因其整套成熟、完整的表演体系，对各地的剧种产生了不同程度的影响。秦腔的表演技艺朴实、粗犷、豪放，富有夸张性，生活气息浓厚，技巧丰富。代表曲目有《春秋笔》、《紫霞宫》、《八义图》等
+					</p>
+		      </article>
+		    </div>
+		  </div>
+		</div>
+	
+	<script src='https://unpkg.com/flipping@1.1.0/dist/flipping.web.js'></script>
+	<script>
+		console.clear();
+
+		const elPrevButton = document.querySelector('#prev');
+		const elNextButton = document.querySelector('#next');
+		const flipping = new Flipping();
+
+		const elImages = Array.from(document.querySelectorAll('.ui-big-image'));
+		const elThumbnails = Array.from(document.querySelectorAll('.ui-thumbnail'));
+
+		let state = {
+		  photo: 0
+		};
+
+		function send(event) {
+		  // read cuticle positions
+		  flipping.read();
+		  
+		  const elActives = document.querySelectorAll('[data-active]');
+		  
+		  Array.from(elActives)
+		    .forEach(el => el.removeAttribute('data-active'));
+
+		  switch (event) {
+		    case 'PREV':
+		      state.photo--;
+		      // Math.max(state.photo - 1, 0);
+		      break;
+		    case 'NEXT':
+		      state.photo++;
+		      // Math.min(state.photo + 1, elImages.length - 1);
+		      break;
+		    default:
+		      state.photo = +event;
+		      break;
+		  }
+		  
+		  var len = elImages.length;
+		  // Loop Around
+		  //state.photo = ( ( state.photo % len) + len ) % len;
+		  state.photo = Math.max(0, Math.min( state.photo, len - 1) );
+
+		  Array.from(document.querySelectorAll(`[data-key="${state.photo}"]`))
+		    .forEach( el => {
+		    el.setAttribute('data-active', true);
+		  });
+		  
+		  // execute the FLIP animation
+		  flipping.flip();
+		}
+
+		elThumbnails.forEach( thumb => { 
+		  thumb.addEventListener('click', () => {
+		    send(thumb.dataset.key);
+		  });
+		});
+
+		elPrevButton.addEventListener('click', () => {
+		  send('PREV');
+		});
+
+		elNextButton.addEventListener('click', () => {
+		  send('NEXT');
+		});
+
+		send(0);
+	</script>
+</body>
+</html>

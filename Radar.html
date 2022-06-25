@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>京剧和越剧基于radar图的分析</title>
+	<link rel="stylesheet" type="text/css" href="Opera/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="Opera/戏曲人生/css/default.css">
+</head>
+
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>京剧和越剧基于radar图的分析<span>Analysis of Peking Opera and Yue opera based on radar chart</span></h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="Opera Introduction.html" title="戏曲简介"
+					target="_blank"><span>戏曲简介</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="Opera Distribution.html" title="演出分布"
+					target="_blank"><span>演出分布</span></a>
+			</div>
+			<div class="htmleaf-demo center">
+				<a href="line.html">Line Chart</a>
+
+				<a href="bar.html">Bar Chart</a>
+				<a href="doughnut.html">Doughnut Chart</a>
+
+				<a href="polar-area.html">Polar Area Chart</a>
+				<a href="radar.html" class="current">Radar Area Chart</a>
+			</div>
+		</header>
+		<div class="htmleaf-content">
+			<div style="width:30%;margin:0 auto;">
+				<canvas id="canvas" height="415" width="450"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<script src="Opera/js/Chart.js"></script>
+	<script>
+		var radarChartData = {
+			labels: ["发展趋势", "影响范围", "演员班底", "文化表现力", "传承力度"],
+			datasets: [
+				{
+					label: "京剧",
+					fillColor: "rgba(220,220,220,0.2)",
+					strokeColor: "rgba(220,220,220,1)",
+					pointColor: "rgba(220,220,220,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(220,220,220,1)",
+					data: [65, 75, 90, 81, 45,]
+				},
+				{
+					label: "越剧",
+					fillColor: "rgba(151,187,205,0.2)",
+					strokeColor: "rgba(151,187,205,1)",
+					pointColor: "rgba(151,187,205,1)",
+					pointStrokeColor: "#fff",
+					pointHighlightFill: "#fff",
+					pointHighlightStroke: "rgba(151,187,205,1)",
+					data: [82, 67, 78, 80, 56]
+				}
+			]
+		};
+
+		window.onload = function () {
+			window.myRadar = new Chart(document.getElementById("canvas").getContext("2d")).Radar(radarChartData, {
+				responsive: true
+			});
+		}
+	</script>
+
+</body>
+
+</html>

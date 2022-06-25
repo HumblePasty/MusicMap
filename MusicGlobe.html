@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
+  <script src="https://js.arcgis.com/4.22/"></script>
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .panel-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel-side {
+      padding: 2px;
+      box-sizing: border-box;
+      width: 300px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.6);
+      overflow: auto;
+      z-index: 60;
+    }
+
+    .panel-side h3 {
+      padding: 0 20px;
+      margin: 20px 0;
+    }
+
+    .panel-side h4 {
+      padding: 0 20px;
+      margin: 20px 0;
+    }
+
+    .panel-side ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .panel-side li {
+      list-style: none;
+      padding: 10px 20px;
+    }
+
+    .panel-result {
+      cursor: pointer;
+      margin: 2px 0;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .panel-result:hover,
+    .panel-result:focus {
+      color: orange;
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    #titleDiv {
+        background-color: lightgray;
+        color: black;
+        padding: 5px;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        font-size: 20pt;
+        font-weight: bolder;
+        width: 100%;
+        height: 30px;
+        text-align: center;
+        opacity: 0.75;
+      }
+
+  </style>
+
+
+
+  <script type="text/javascript">
+    require([
+      "esri/config",
+      "esri/Map",
+      "esri/PopupTemplate",
+      "esri/popup/content/CustomContent",
+      "esri/widgets/Search",
+      "esri/rest/support/Query",
+      "esri/rest/query",
+      "esri/views/SceneView",
+      "esri/layers/FeatureLayer"
+    ], function (
+      esriConfig,
+      Map,
+      PopupTemplate,
+      CustomContent,
+      Search,
+      Query,
+      query,
+      SceneView,
+      FeatureLayer) {
+
+      esriConfig.apiKey = "AAPK0be1de8cd48648408f55716fd4d524efytO-TUzi6xH6BUsOUroWk0FbpogQfzN2xPSCNHHegDlRUmG6ufi-sTlaIJx4ZAcH";
+
+      const CountryLayer = new FeatureLayer({
+        url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/WOR_Boundaries_2019/FeatureServer/1",
+        outFields: ["*"],//OutField是图层数组的外键，*表示全部都视作外键
+      });
+
+      const map = new Map({
+        basemap: "arcgis-topographic",
+        layers: [CountryLayer]
+      });
+
+      // 构建三维视图
+      const view = new SceneView({
+        container: "viewDiv",
+        map: map,
+        center: [114.30, 30.60],
+        zoom: 4,
+        padding: {
+          right: 300
+        },
+        popup: {
+          defaultPopupTemplateEnabled: false,
+          dockEnabled: true,
+          dockOptions: {
+            buttonEnabled: false,
+            breakpoint: false
+          }
+        }
+      });
+
+      // const popupTemplate = {//在这里修改弹窗的表格，这一版为初版，作废
+      //   title: "{NAME}",
+      //   content: [
+      //     {
+      //       type: "fields",
+      //       fieldInfos: [
+      //         {
+      //           fieldName: "ISO_CC",//字段名字
+      //           label: "ISO_CODE",
+      //           format: {
+      //             places: 0,
+      //             digitSeparator: true
+      //           }
+      //         },
+      //         {
+      //           fieldName: "CONTINENT",
+      //           label: "Continent",
+      //           format: {
+      //             places: 0,
+      //             digitSeparator: true
+      //           }
+      //         },
+      //         {
+      //           fieldName: "NAMEAFF",
+      //           label: "Affilition",
+      //           format: {
+      //             places: 0,
+      //             digitSeparator: true
+      //           }
+      //         },
+      //       ]
+      //     }
+      //   ]
+      // };
+
+      /*     const provinceLayer = new FeatureLayer({
+              url: "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/CHN_Boundaries_2020/FeatureServer/1",
+              outFields: ["NAME", "ID"],
+              popupTemplate: popupTemplate
+          });
+          map.add(provinceLayer)
+          const taiwanLayer=new FeatureLayer({
+              url:"https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/TWN_Boundaries_2020/FeatureServer/1",
+              popupTemplate: popupTemplate
+          })
+          map.add(taiwanLayer);
+          const HongKongLayer=new FeatureLayer({
+              url:"https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/TWN_Boundaries_2020/FeatureServer/0",
+              popupTemplate: popupTemplate
+          })
+          map.add(HongKongLayer);
+          const MacaoLayer=new FeatureLayer({
+              url:"https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/MAC_Boundaries_2020/FeatureServer/0",
+              popupTemplate: popupTemplate
+          })
+          map.add(HongKongLayer); */
+
+      const listNode = document.getElementById("nyc_graphics");
+
+      //载入Youtube数据
+      var request = new XMLHttpRequest();
+      request.open("get", "json/YoutubeOri.json");
+      request.send(null);
+      request.onload = function () {
+        if (request.status == 200) {
+          json = JSON.parse(request.responseText);
+          console.log(json)
+          // var json_query=json.filter(function(item){
+          //   return item.Country == 'Chile'
+          // })
+          // console.log(json_query)
+        }
+      }
+
+      view.when(() => {
+
+        // 构建搜索栏
+        let searchWidget = new Search({
+          view: view,
+          includeDefaultSources: false,
+          locationEnabled: false,
+          popupEnabled: true,
+          searchAllEnabled: false,
+          suggestionsEnabled: true,
+          sources: [{
+            layer: CountryLayer,
+            searchFields: ["NAME"],
+            displayField: "NAME",
+            exactMatch: false,
+            outFields: ["*"],
+            name: "Country Name",
+            placeholder: "Search by Country Name",
+          }]
+        });
+
+        // 将搜索栏加入到弹窗的组件对象中
+        const contentWidget = new CustomContent({
+          outFields: ["*"],
+          creator: () => {
+            return searchWidget;
+          }
+        });
+
+
+        const contentPromise = new CustomContent({
+          //构造要显示的音乐列表
+          outFields: ["*"],
+          creator: (event) => {
+            //获取当前的国家名字
+            const countryname = event.graphic.attributes.NAME;
+            console.log(countryname)
+
+            //根据国家名字来检索排行榜
+            var json_query = json.filter(function (item) {
+              return item.Country == countryname && item.Rank < 10
+            })
+            console.log(json_query)
+
+            //根据国家名字来构建MusicBrainz的查询url
+            const MBURL = "https://musicbrainz.org/ws/2/artist?query=area:" + encodeURIComponent(countryname) + "&limit=5&fmt=json"
+            console.log(MBURL);
+
+            //根据构造的URL检索这个地区的代表Artists
+            var request = new XMLHttpRequest();
+            request.open("get", MBURL)
+            request.send(null);
+            request.onload = function () {
+              if (request.status == 200) {
+                repreArtists = JSON.parse(request.responseText);
+                console.log(repreArtists.artists[0])
+                console.log(Object.keys(repreArtists.artists).length)
+              }
+            }
+
+            //按照查询的情况构建弹窗内容
+            if (Object.keys(json_query).length == 0 && Object.keys(repreArtists.artists).length == 0) {
+              return `No Music Ranking Data Found in <b>${countryname}</b>!
+            <br>
+            <br>
+            No Representative Artists Data Found in <b>${countryname}</b>!`
+            }
+            else if (Object.keys(json_query).length == 0 && Object.keys(repreArtists.artists).length != 0) {
+              return `No Music Ranking Data Found in <b>${countryname}</b>!
+            <br>
+            <br>
+            The Representative Artists in <b>${countryname}</b> are:
+            <br>
+            <table width="100%" border="1px">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Score</th>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[0].name}</td>
+                <td style="text-align:center">${repreArtists.artists[0].type}</td>
+                <td style="text-align:center">${repreArtists.artists[0].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[1].name}</td>
+                <td style="text-align:center">${repreArtists.artists[1].type}</td>
+                <td style="text-align:center">${repreArtists.artists[1].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[2].name}</td>
+                <td style="text-align:center">${repreArtists.artists[2].type}</td>
+                <td style="text-align:center">${repreArtists.artists[2].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[3].name}</td>
+                <td style="text-align:center">${repreArtists.artists[3].type}</td>
+                <td style="text-align:center">${repreArtists.artists[3].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[4].name}</td>
+                <td style="text-align:center">${repreArtists.artists[4].type}</td>
+                <td style="text-align:center">${repreArtists.artists[4].score}</td>
+              </tr>
+            </table>`
+            }
+            else if (Object.keys(json_query).length != 0 && Object.keys(repreArtists.artists).length == 0) {
+              return `The Hottest Songs in <b>${countryname}</b> are:
+            <br>
+            <table border="1px">
+              <tr>
+                <th>Rank</th>
+                <th>Track Name</th>
+                <th>Artist</th>
+                <th>Youtube Link</th>
+              </tr>
+              <tr>
+                <td><b>${json_query[0].Rank}</b></td>
+                <td>${json_query[0].TrackName}</td>
+                <td>${json_query[0].ArtistNames}</td>
+                <td>${json_query[0].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[1].Rank}</b></td>
+                <td>${json_query[1].TrackName}</td>
+                <td>${json_query[1].ArtistNames}</td>
+                <td>${json_query[1].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[2].Rank}</b></td>
+                <td>${json_query[2].TrackName}</td>
+                <td>${json_query[2].ArtistNames}</td>
+                <td>${json_query[2].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[3].Rank}</b></td>
+                <td>${json_query[3].TrackName}</td>
+                <td>${json_query[3].ArtistNames}</td>
+                <td>${json_query[3].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[4].Rank}</b></td>
+                <td>${json_query[4].TrackName}</td>
+                <td>${json_query[4].ArtistNames}</td>
+                <td>${json_query[4].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[5].Rank}</b></td>
+                <td>${json_query[5].TrackName}</td>
+                <td>${json_query[5].ArtistNames}</td>
+                <td>${json_query[5].YouTubeURL}</td>
+              </tr>
+            </table>
+            <br>
+            No Representative Artists Data Found in <b>${countryname}</b>!`
+            }
+            else if (Object.keys(json_query).length != 0 && Object.keys(repreArtists.artists).length != 0) {
+              return `The Hottest Songs in <b>${countryname}</b> are:
+            <br>
+            <table border="1px">
+              <tr>
+                <th>Rank</th>
+                <th>Track Name</th>
+                <th>Artist</th>
+                <th>Youtube Link</th>
+              </tr>
+              <tr>
+                <td><b>${json_query[0].Rank}</b></td>
+                <td>${json_query[0].TrackName}</td>
+                <td>${json_query[0].ArtistNames}</td>
+                <td>${json_query[0].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[1].Rank}</b></td>
+                <td>${json_query[1].TrackName}</td>
+                <td>${json_query[1].ArtistNames}</td>
+                <td>${json_query[1].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[2].Rank}</b></td>
+                <td>${json_query[2].TrackName}</td>
+                <td>${json_query[2].ArtistNames}</td>
+                <td>${json_query[2].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[3].Rank}</b></td>
+                <td>${json_query[3].TrackName}</td>
+                <td>${json_query[3].ArtistNames}</td>
+                <td>${json_query[3].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[4].Rank}</b></td>
+                <td>${json_query[4].TrackName}</td>
+                <td>${json_query[4].ArtistNames}</td>
+                <td>${json_query[4].YouTubeURL}</td>
+              </tr>
+              <tr>
+                <td><b>${json_query[5].Rank}</b></td>
+                <td>${json_query[5].TrackName}</td>
+                <td>${json_query[5].ArtistNames}</td>
+                <td>${json_query[5].YouTubeURL}</td>
+              </tr>
+            </table>
+            <br>
+            <br>
+            The Representative Artists in <b>${countryname}</b> are:
+            <br>
+            <table width="100%" border="1px">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Score</th>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[0].name}</td>
+                <td style="text-align:center">${repreArtists.artists[0].type}</td>
+                <td style="text-align:center">${repreArtists.artists[0].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[1].name}</td>
+                <td style="text-align:center">${repreArtists.artists[1].type}</td>
+                <td style="text-align:center">${repreArtists.artists[1].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[2].name}</td>
+                <td style="text-align:center">${repreArtists.artists[2].type}</td>
+                <td style="text-align:center">${repreArtists.artists[2].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[3].name}</td>
+                <td style="text-align:center">${repreArtists.artists[3].type}</td>
+                <td style="text-align:center">${repreArtists.artists[3].score}</td>
+              </tr>
+              <tr>
+                <td style="text-align:center">${repreArtists.artists[4].name}</td>
+                <td style="text-align:center">${repreArtists.artists[4].type}</td>
+                <td style="text-align:center">${repreArtists.artists[4].score}</td>
+              </tr>
+            </table>`
+            }
+          }
+        })
+
+        searchWidget.on("search-complete", (searchResult) => {
+          searchWidget.clear();
+        });
+
+        const template = new PopupTemplate({
+          outFields: ["*"],
+          title: "{NAME}",
+          content: [
+            contentWidget,
+            {
+              type: "fields",
+              fieldInfos: [
+                //在这里修改要显示的字段
+                {
+                  fieldName: "ISO_3DIGIT",
+                  label: "ISO Code"
+                },
+                {
+                  fieldName: "CAPITAL",
+                  label: "Capital"
+                },
+                {
+                  fieldName: "CONTINENT",
+                  label: "Continent"
+                },
+                {
+                  fieldName: "COUNTRYAFF",
+                  label: "Affiliation"
+                },
+              ]
+            },
+            //显示音乐相关数据
+            contentPromise
+          ]
+        });
+        CountryLayer.popupTemplate = template;
+      });
+
+
+
+      let graphics;
+
+      view.whenLayerView(CountryLayer).then(function (layerView) {
+        //每次拖动视窗，重新加载对象
+        layerView.watch("updating", function (value) {
+          if (!value) {
+            // 等待视图的加载
+            layerView
+              .queryFeatures({
+                geometry: view.extent,
+                returnGeometry: true,
+                orderByFields: ["ISO_3DIGIT"]
+              })
+              .then(function (results) {
+                graphics = results.features;
+
+                const fragment = document.createDocumentFragment();
+
+                graphics.forEach(function (result, index) {
+                  const attributes = result.attributes;
+                  const name = attributes.NAME;//根据字段显示
+
+                  //加入列表行
+                  const li = document.createElement("li");
+                  li.classList.add("panel-result");
+                  li.tabIndex = 0;
+                  li.setAttribute("data-result-id", index);
+                  li.textContent = name;
+
+                  fragment.appendChild(li);
+                });
+                // 清空当前列表
+                listNode.innerHTML = "";
+                listNode.appendChild(fragment);
+              })
+              .catch(function (error) {
+                console.error("query failed: ", error);
+              });
+          }
+        });
+      });
+
+      // 右侧栏的点击事件
+      listNode.addEventListener("click", onListClickHandler);
+
+      function onListClickHandler(event) {
+        const target = event.target;
+        const resultId = target.getAttribute("data-result-id");
+
+        const result = resultId && graphics && graphics[parseInt(resultId, 10)];
+
+        if (result) {
+          view.goTo(result.geometry.extent.expand(2)).then(function () {
+            view.popup.open({
+              features: [result],
+              location: result.geometry.centroid
+            });
+          })
+            .catch(function (error) {
+              if (error.name != "AbortError") {
+                console.error(error);
+              }
+            });
+        }
+      }
+
+    });
+  </script>
+</head>
+
+<body>
+  <div class="panel-container">
+    <div class="panel-side esri-widget">
+
+      <!-- <ul class="nav nav-tabs">
+        <li class="active"><a href="#Countries" data-toggle="tab">国家</a></li>
+        <li><a href="#Genres" data-toggle="tab">流派</a></li>
+      </ul> -->
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="Countries">
+          <h3>Countries in View: </h3>
+          <h4>click to navigate</h>
+          <ul id="nyc_graphics">
+            <li>Loading&hellip;</li>
+          </ul>
+        </div>
+
+        <!-- <div class="tab-pane" id="Genres">
+          <h3>音乐流派列表</h3>
+          //这一部分似乎用不上
+          <ul id="genre_list">
+
+          </ul>
+        </div> -->
+      </div>
+    </div>
+
+    <div id="titleDiv">Pop Trend and Famous Artists</div>
+
+    <div id="viewDiv"></div>
+  </div>
+
+</body>
+
+</html>

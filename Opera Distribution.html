@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html style="height:100%">
+
+<head>
+  <title>MusicMap 各省戏曲演出分布概览</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="City Music/css/style.css">
+  <link rel="stylesheet" href="City Music/css/style1.css">
+  <link rel="stylesheet" href="City Music/css/bootstrap.min.css">
+  <link rel="stylesheet" href="City Music/css/fl-bigmug-line.css">
+  <link rel="stylesheet" href="Opera/css/Facialstyle.css">
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+  <style>
+    body {
+      background: url(Opera/image/operabg1.jpg) top left;
+      background-size: auto;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Page Preloder -->
+  <div id="preloder">
+    <div class="loader"></div>
+  </div>
+
+  <!-- .site-mobile-menu -->
+  <div class="site-wrap">
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <div class="site-navbar-wrap bg-white">
+      <div class="site-navbar-top">
+        <div class="container py-2">
+          <div class="row align-items-center">
+            <div class="col-6 col-md-6 col-lg-2">
+              <a href="" class="d-flex align-items-center site-logo">
+                <span class="fl-bigmug-line-cube29 mr-3 cube-bg"></span>
+                <span>MusicMap</span>
+              </a>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-10">
+              <ul class="unit-4 ml-auto text-right">
+
+                <li class="text-left">
+                  <a href="#">
+                    <div class="d-flex align-items-center block-unit">
+                      <div class="icon mr-0 mr-md-4">
+                        <span class="fl-bigmug-line-headphones32 h3"></span>
+                      </div>
+                      <div class="d-none d-lg-block">
+                        <span class="d-block text-gray-500 text-uppercase">联系我们</span>
+                        <span class="h6">1-234-200-3911</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+
+                <li class="text-left">
+                  <a href="#">
+                    <div class="d-flex align-items-center block-unit">
+                      <div class="icon mr-0 mr-md-4">
+                        <span class="fl-bigmug-line-email64 h5"></span>
+                      </div>
+                      <div class="d-none d-lg-block">
+                        <span class="d-block text-gray-500 text-uppercase">邮件往来</span>
+                        <span class="h6">mail@whu.edu.com</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+
+                <li class="text-left">
+                  <a href="#">
+                    <div class="d-flex align-items-center block-unit">
+                      <div class="icon mr-0 mr-md-4">
+                        <span class="fl-bigmug-line-chat55 h2"></span>
+                      </div>
+                      <div class="d-none d-lg-block">
+                        <span class="d-block text-gray-500 text-uppercase">在线交流</span>
+                        <span class="h6">Chat With Us Now</span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="site-navbar bg-dark">
+        <div class="container py-1">
+          <div class="row align-items-center">
+
+            <div class="col-4 col-md-4 col-lg-8">
+              <nav class="site-navigation text-left" role="navigation">
+                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#"
+                    class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+
+                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                  <li> <a href="City Music.html">城市脉搏</a> </li>
+                  <li><a href="SilkRoad.html">丝绸之路</a></li>
+                  <li class="has-children active"> <a href="#">戏曲人生</a>
+                    <ul class="dropdown arrow-top">
+                      <li><a href="Opera Introduction.html">前世今生</a></li>
+                      <li><a href="Opera Distribution.html">戏曲散落</a></li>
+                      <li class="has-children">
+                        <a href="#">前路寻觅</a>
+                        <ul class="dropdown">
+                          <li><a href="Line.html">戏曲演出场数</a></li>
+                          <li><a href="Bar.html">京剧演出分布</a></li>
+                          <li><a href="Doughnut.html">越剧演出分布</a></li>
+                          <li><a href="Polar-area.html">戏曲剧团</a></li>
+                          <li><a href="Radar.html">京剧VS越剧</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a href="Popular.html">寰宇风尚</a></li>
+                  <li><a href="Concert.html">音乐狂欢</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-8 col-md-8 col-lg-4 text-right">
+              <a href="register.html" class="btn btn-white btn-outline-white rounded-0 py-2 px-4">注册</a>
+              <a href="register.html" class="btn btn-white btn-outline-white rounded-0 py-2 px-4">登录</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wrap">
+    <div id="left">
+      <div id="container" style="height: 100% ;width:90% ;margin-left : 120px;"></div>
+    </div>
+
+    <div id='right'>
+      <div class="htmleaf-container">
+        <div class="htmleaf-content">
+          <div class="thumb kort">
+            <img src="Opera/image/img1.jpg" width="350" height="500">
+            <img src="Opera/image/img2.jpg" width="350" height="500">
+            <img src="Opera/image/img3.jpg" width="350" height="500">
+            <img src="Opera/image/img4.jpg" width="350" height="500">
+            <img src="Opera/image/img5.jpg" width="350" height="500">
+            <img src="Opera/image/img6.jpg" width="350" height="500">
+            <img src="Opera/image/img7.jpg" width="350" height="500">
+            <img src="Opera/image/img8.jpg" width="350" height="500">
+            <img src="Opera/image/img9.jpg" width="350" height="500">
+            <img src="Opera/image/img10.jpg" width="350" height="500">
+            <img src="Opera/image/img11.jpg" width="350" height="500">
+            <img src="Opera/image/img12.jpg" width="350" height="500">
+            <img src="Opera/image/img13.jpg" width="350" height="500">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (navigator.userAgent.match(/firefox/gi)) {
+      [].slice.call(document.querySelectorAll('.thumb img')).forEach(function (el) { el.style.boxShadow = 'none'; });
+    }
+  </script>
+
+
+  <script type="text/javascript">
+
+    // 基于准备好的dom，初始化echarts实例
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+
+    $.get('Opera/China.json', function (ChinaJson) {
+      // 隐藏 loading 效果
+      myChart.hideLoading();
+      // 采用 registerMap 进行手动注册，给地图取一个名字
+      echarts.registerMap('China', ChinaJson);
+
+      // 指定图表的配置项和数据
+      myChart.setOption(
+        (option = {
+          title: {
+            text: '中国戏曲演出场次以及分布',
+            left: 'center',
+            textStyle: {
+              fontfamily: '微软雅黑',
+              fontSize: '20',
+              color: 'silver'
+            },
+            link: '#'
+          },
+
+          // tooltip是提示框组件，即鼠标移上去时候显示的提示信息
+          tooltip: {
+            trigger: 'item',
+            formatter: function (params) {
+              var res = params.name + ':<br />';
+              var myseries = option.series;
+              for (var i = 0; i < myseries.length; i++) {
+                res += myseries[i].name;
+                for (var j = 0; j < myseries[i].data.length; j++) {
+                  if (myseries[i].data[j].name == params.name) {
+                    res += ":" + myseries[i].data[j].value + '次 <br/>'
+                  }
+                }
+              }
+              return res;
+            }
+          },
+
+          toolbox: {
+            show: true,
+            orient: 'vertical',
+            left: 'right',
+            top: 'top',
+            feature: {
+              dataView: {
+                readOnly: false
+              },
+              restore: {},
+              saveAsImage: {}
+            }
+          },
+
+          series: [
+            {
+              name: '中国戏曲演出总场次',
+              type: 'map',
+              mapType: 'China',
+              zoom: 1.25,
+              selectedMode: 'single', // multiple多选
+              label: {
+                show: true,
+                textStyle: {
+                  fontSize: 11,
+                  color: 'white'
+                }
+              },
+
+              itemStyle: {
+                normal: {
+                  areaColor: 'rgba(128, 128, 128, 0)', //rgba设置透明度0
+                  borderColor: 'lightgray',//省份边框颜色
+                  borderWidth: 2,//省份边框
+                },
+                emphasis: {
+                  areaColor: '#556B2F',
+                  borderWidth: 1,
+                  borderColor: 'white',
+                }
+              },
+
+              data: [
+                { name: '台湾省', value: 529 }, //跳转分析/介绍页面
+                { name: '内蒙古自治区', value: 261 },
+                { name: '云南省', value: 2452 },
+                { name: '广西壮族自治区', value: 1624 },
+                { name: '香港特别行政区', value: 516 },
+                { name: '辽宁省', value: 416 },
+                { name: '河南省', value: 2875 },
+                { name: '上海市', value: 10429 },
+                { name: '广东省', value: 3786 },
+                { name: '黑龙江省', value: 930 },
+                { name: '山东省', value: 1596 },
+                { name: '四川省', value: 2006 },
+                { name: '河北省', value: 1931 },
+                { name: '天津市', value: 6021 },
+                { name: '浙江省', value: 3588 },
+                { name: '福建省', value: 1785 },
+                { name: '陕西省', value: 6279 },
+                { name: '北京市', value: 9497 },
+                { name: '吉林省', value: 866 },
+                { name: '江苏省', value: 3514 },
+                { name: '山西省', value: 1335 },
+                { name: '重庆市', value: 1938 },
+                { name: '湖南省', value: 2247 },
+                { name: '湖北省', value: 5305 },
+                { name: '安徽省', value: 3987 },
+                { name: '新疆维吾尔自治区', value: 3348 },
+                { name: '江西省', value: 2147 },
+                { name: '甘肃省', value: 5726 },
+                { name: '海南省', value: 305 },
+                { name: '贵州省', value: 452 },
+                { name: '宁夏回族自治区', value: 557 },
+                { name: '澳门特别行政区', value: 296 },
+                { name: '青海省', value: 4438 },
+                { name: '西藏自治区', value: 123 }
+              ],
+            },
+
+            {
+              name: '京剧',
+              data: [
+                { name: '台湾省', value: 154 },
+                { name: '内蒙古自治区', value: 26 },
+                { name: '云南省', value: 21 },
+                { name: '广西壮族自治区', value: 34 },
+                { name: '香港特别行政区', value: 61 },
+                { name: '辽宁省', value: 45 },
+                { name: '河南省', value: 276 },
+                { name: '上海市', value: 3927 },
+                { name: '广东省', value: 353 },
+                { name: '黑龙江省', value: 134 },
+                { name: '山东省', value: 213 },
+                { name: '四川省', value: 127 },
+                { name: '河北省', value: 64 },
+                { name: '天津市', value: 4782 },
+                { name: '浙江省', value: 315 },
+                { name: '福建省', value: 212 },
+                { name: '陕西省', value: 485 },
+                { name: '北京市', value: 5082 },
+                { name: '吉林省', value: 123 },
+                { name: '江苏省', value: 98 },
+                { name: '山西省', value: 27 },
+                { name: '重庆市', value: 55 },
+                { name: '湖南省', value: 35 },
+                { name: '湖北省', value: 2583 },
+                { name: '安徽省', value: 53 },
+                { name: '新疆维吾尔自治区', value: 382 },
+                { name: '江西省', value: 23 },
+                { name: '甘肃省', value: 492 },
+                { name: '海南省', value: 13 },
+                { name: '贵州省', value: 52 },
+                { name: '宁夏回族自治区', value: 19 },
+                { name: '澳门特别行政区', value: 24 },
+                { name: '青海省', value: 398 },
+                { name: '西藏自治区', value: 38 }
+              ],
+            },
+
+            {
+              name: '豫剧',
+              data: [
+                { name: '台湾省', value: 17 },
+                { name: '内蒙古自治区', value: 2 },
+                { name: '云南省', value: 25 },
+                { name: '广西壮族自治区', value: 37 },
+                { name: '香港特别行政区', value: 8 },
+                { name: '辽宁省', value: 35 },
+                { name: '河南省', value: 1042 },
+                { name: '上海市', value: 68 },
+                { name: '广东省', value: 63 },
+                { name: '黑龙江省', value: 39 },
+                { name: '山东省', value: 495 },
+                { name: '四川省', value: 34 },
+                { name: '河北省', value: 536 },
+                { name: '天津市', value: 13 },
+                { name: '浙江省', value: 45 },
+                { name: '福建省', value: 13 },
+                { name: '陕西省', value: 348 },
+                { name: '北京市', value: 92 },
+                { name: '吉林省', value: 12 },
+                { name: '江苏省', value: 34 },
+                { name: '山西省', value: 21 },
+                { name: '重庆市', value: 26 },
+                { name: '湖南省', value: 34 },
+                { name: '湖北省', value: 372 },
+                { name: '安徽省', value: 13 },
+                { name: '新疆维吾尔自治区', value: 154 },
+                { name: '江西省', value: 21 },
+                { name: '甘肃省', value: 293 },
+                { name: '海南省', value: 12 },
+                { name: '贵州省', value: 13 },
+                { name: '宁夏回族自治区', value: 11 },
+                { name: '澳门特别行政区', value: 26 },
+                { name: '青海省', value: 248 },
+                { name: '西藏自治区', value: 3 }
+              ],
+            },
+
+            {
+              name: '秦腔',
+              data: [
+                { name: '台湾省', value: 152 },
+                { name: '内蒙古自治区', value: 35 },
+                { name: '云南省', value: 45 },
+                { name: '广西壮族自治区', value: 84 },
+                { name: '香港特别行政区', value: 181 },
+                { name: '辽宁省', value: 134 },
+                { name: '河南省', value: 853 },
+                { name: '上海市', value: 657 },
+                { name: '广东省', value: 245 },
+                { name: '黑龙江省', value: 264 },
+                { name: '山东省', value: 134 },
+                { name: '四川省', value: 562 },
+                { name: '河北省', value: 145 },
+                { name: '天津市', value: 212 },
+                { name: '浙江省', value: 131 },
+                { name: '福建省', value: 73 },
+                { name: '陕西省', value: 4926 },
+                { name: '北京市', value: 642 },
+                { name: '吉林省', value: 78 },
+                { name: '江苏省', value: 53 },
+                { name: '山西省', value: 242 },
+                { name: '重庆市', value: 83 },
+                { name: '湖南省', value: 473 },
+                { name: '湖北省', value: 62 },
+                { name: '安徽省', value: 85 },
+                { name: '新疆维吾尔自治区', value: 2553 },
+                { name: '江西省', value: 134 },
+                { name: '甘肃省', value: 4527 },
+                { name: '海南省', value: 18 },
+                { name: '贵州省', value: 24 },
+                { name: '宁夏回族自治区', value: 241 },
+                { name: '澳门特别行政区', value: 133 },
+                { name: '青海省', value: 3551 },
+                { name: '西藏自治区', value: 12 }
+              ],
+            },
+
+            {
+              name: '越剧',
+              data: [
+                { name: '台湾省', value: 31 },
+                { name: '内蒙古自治区', value: 11 },
+                { name: '云南省', value: 53 },
+                { name: '广西壮族自治区', value: 1273 },
+                { name: '香港特别行政区', value: 21 },
+                { name: '辽宁省', value: 34 },
+                { name: '河南省', value: 56 },
+                { name: '上海市', value: 323 },
+                { name: '广东省', value: 2160 },
+                { name: '黑龙江省', value: 12 },
+                { name: '山东省', value: 123 },
+                { name: '四川省', value: 97 },
+                { name: '河北省', value: 34 },
+                { name: '天津市', value: 42 },
+                { name: '浙江省', value: 55 },
+                { name: '福建省', value: 32 },
+                { name: '陕西省', value: 55 },
+                { name: '北京市', value: 484 },
+                { name: '吉林省', value: 144 },
+                { name: '江苏省', value: 33 },
+                { name: '山西省', value: 63 },
+                { name: '重庆市', value: 38 },
+                { name: '湖南省', value: 144 },
+                { name: '湖北省', value: 374 },
+                { name: '安徽省', value: 237 },
+                { name: '新疆维吾尔自治区', value: 54 },
+                { name: '江西省', value: 23 },
+                { name: '甘肃省', value: 97 },
+                { name: '海南省', value: 23 },
+                { name: '贵州省', value: 65 },
+                { name: '宁夏回族自治区', value: 24 },
+                { name: '澳门特别行政区', value: 13 },
+                { name: '青海省', value: 64 },
+                { name: '西藏自治区', value: 13 }
+              ],
+            },
+
+            {
+              name: '河北梆子',
+              data: [
+                { name: '台湾省', value: 21 },
+                { name: '内蒙古自治区', value: 8 },
+                { name: '云南省', value: 12 },
+                { name: '广西壮族自治区', value: 31 },
+                { name: '香港特别行政区', value: 42 },
+                { name: '辽宁省', value: 53 },
+                { name: '河南省', value: 67 },
+                { name: '上海市', value: 152 },
+                { name: '广东省', value: 143 },
+                { name: '黑龙江省', value: 67 },
+                { name: '山东省', value: 86 },
+                { name: '四川省', value: 34 },
+                { name: '河北省', value: 458 },
+                { name: '天津市', value: 461 },
+                { name: '浙江省', value: 53 },
+                { name: '福建省', value: 24 },
+                { name: '陕西省', value: 64 },
+                { name: '北京市', value: 492 },
+                { name: '吉林省', value: 23 },
+                { name: '江苏省', value: 346 },
+                { name: '山西省', value: 43 },
+                { name: '重庆市', value: 75 },
+                { name: '湖南省', value: 54 },
+                { name: '湖北省', value: 42 },
+                { name: '安徽省', value: 276 },
+                { name: '新疆维吾尔自治区', value: 15 },
+                { name: '江西省', value: 23 },
+                { name: '甘肃省', value: 31 },
+                { name: '海南省', value: 24 },
+                { name: '贵州省', value: 13 },
+                { name: '宁夏回族自治区', value: 52 },
+                { name: '澳门特别行政区', value: 19 },
+                { name: '青海省', value: 32 },
+                { name: '西藏自治区', value: 6 }
+              ],
+            },
+
+            {
+              name: '黄梅戏',
+              data: [
+                { name: '台湾省', value: 33 },
+                { name: '内蒙古自治区', value: 21 },
+                { name: '云南省', value: 64 },
+                { name: '广西壮族自治区', value: 16 },
+                { name: '香港特别行政区', value: 17 },
+                { name: '辽宁省', value: 19 },
+                { name: '河南省', value: 12 },
+                { name: '上海市', value: 162 },
+                { name: '广东省', value: 23 },
+                { name: '黑龙江省', value: 17 },
+                { name: '山东省', value: 22 },
+                { name: '四川省', value: 74 },
+                { name: '河北省', value: 142 },
+                { name: '天津市', value: 84 },
+                { name: '浙江省', value: 165 },
+                { name: '福建省', value: 53 },
+                { name: '陕西省', value: 21 },
+                { name: '北京市', value: 102 },
+                { name: '吉林省', value: 53 },
+                { name: '江苏省', value: 745 },
+                { name: '山西省', value: 42 },
+                { name: '重庆市', value: 12 },
+                { name: '湖南省', value: 49 },
+                { name: '湖北省', value: 362 },
+                { name: '安徽省', value: 632 },
+                { name: '新疆维吾尔自治区', value: 26 },
+                { name: '江西省', value: 434 },
+                { name: '甘肃省', value: 54 },
+                { name: '海南省', value: 23 },
+                { name: '贵州省', value: 64 },
+                { name: '宁夏回族自治区', value: 23 },
+                { name: '澳门特别行政区', value: 13 },
+                { name: '青海省', value: 13 },
+                { name: '西藏自治区', value: 5 }
+              ],
+            },
+
+            {
+              name: '晋剧',
+              data: [
+                { name: '台湾省', value: 37 },
+                { name: '内蒙古自治区', value: 12 },
+                { name: '云南省', value: 32 },
+                { name: '广西壮族自治区', value: 34 },
+                { name: '香港特别行政区', value: 12 },
+                { name: '辽宁省', value: 16 },
+                { name: '河南省', value: 23 },
+                { name: '上海市', value: 3811 },
+                { name: '广东省', value: 64 },
+                { name: '黑龙江省', value: 76 },
+                { name: '山东省', value: 96 },
+                { name: '四川省', value: 27 },
+                { name: '河北省', value: 94 },
+                { name: '天津市', value: 84 },
+                { name: '浙江省', value: 2178 },
+                { name: '福建省', value: 968 },
+                { name: '陕西省', value: 26 },
+                { name: '北京市', value: 946 },
+                { name: '吉林省', value: 233 },
+                { name: '江苏省', value: 1839 },
+                { name: '山西省', value: 221 },
+                { name: '重庆市', value: 264 },
+                { name: '湖南省', value: 434 },
+                { name: '湖北省', value: 546 },
+                { name: '安徽省', value: 1524 },
+                { name: '新疆维吾尔自治区', value: 25 },
+                { name: '江西省', value: 1329 },
+                { name: '甘肃省', value: 35 },
+                { name: '海南省', value: 27 },
+                { name: '贵州省', value: 45 },
+                { name: '宁夏回族自治区', value: 53 },
+                { name: '澳门特别行政区', value: 24 },
+                { name: '青海省', value: 43 },
+                { name: '西藏自治区', value: 17 }
+              ],
+            },
+
+            {
+              name: '川剧',
+              data: [
+                { name: '台湾省', value: 36 },
+                { name: '内蒙古自治区', value: 16 },
+                { name: '云南省', value: 53 },
+                { name: '广西壮族自治区', value: 32 },
+                { name: '香港特别行政区', value: 42 },
+                { name: '辽宁省', value: 12 },
+                { name: '河南省', value: 64 },
+                { name: '上海市', value: 432 },
+                { name: '广东省', value: 75 },
+                { name: '黑龙江省', value: 46 },
+                { name: '山东省', value: 84 },
+                { name: '四川省', value: 946 },
+                { name: '河北省', value: 247 },
+                { name: '天津市', value: 156 },
+                { name: '浙江省', value: 275 },
+                { name: '福建省', value: 184 },
+                { name: '陕西省', value: 173 },
+                { name: '北京市', value: 583 },
+                { name: '吉林省', value: 97 },
+                { name: '江苏省', value: 157 },
+                { name: '山西省', value: 55 },
+                { name: '重庆市', value: 1263 },
+                { name: '湖南省', value: 253 },
+                { name: '湖北省', value: 123 },
+                { name: '安徽省', value: 94 },
+                { name: '新疆维吾尔自治区', value: 25 },
+                { name: '江西省', value: 72 },
+                { name: '甘肃省', value: 45 },
+                { name: '海南省', value: 28 },
+                { name: '贵州省', value: 24 },
+                { name: '宁夏回族自治区', value: 43 },
+                { name: '澳门特别行政区', value: 17 },
+                { name: '青海省', value: 38 },
+                { name: '西藏自治区', value: 9 }
+              ],
+            },
+
+            {
+              name: '花鼓戏',
+              data: [
+                { name: '台湾省', value: 13 },
+                { name: '内蒙古自治区', value: 36 },
+                { name: '云南省', value: 73 },
+                { name: '广西壮族自治区', value: 24 },
+                { name: '香港特别行政区', value: 27 },
+                { name: '辽宁省', value: 32 },
+                { name: '河南省', value: 57 },
+                { name: '上海市', value: 437 },
+                { name: '广东省', value: 393 },
+                { name: '黑龙江省', value: 176 },
+                { name: '山东省', value: 164 },
+                { name: '四川省', value: 33 },
+                { name: '河北省', value: 123 },
+                { name: '天津市', value: 65 },
+                { name: '浙江省', value: 153 },
+                { name: '福建省', value: 75 },
+                { name: '陕西省', value: 76 },
+                { name: '北京市', value: 487 },
+                { name: '吉林省', value: 26 },
+                { name: '江苏省', value: 83 },
+                { name: '山西省', value: 23 },
+                { name: '重庆市', value: 34 },
+                { name: '湖南省', value: 583 },
+                { name: '湖北省', value: 628 },
+                { name: '安徽省', value: 922 },
+                { name: '新疆维吾尔自治区', value: 64 },
+                { name: '江西省', value: 12 },
+                { name: '甘肃省', value: 42 },
+                { name: '海南省', value: 53 },
+                { name: '贵州省', value: 46 },
+                { name: '宁夏回族自治区', value: 34 },
+                { name: '澳门特别行政区', value: 25 },
+                { name: '青海省', value: 12 },
+                { name: '西藏自治区', value: 14 }
+              ],
+            },
+
+            {
+              name: '蒲剧',
+              data: [
+                { name: '台湾省', value: 23 },
+                { name: '内蒙古自治区', value: 56 },
+                { name: '云南省', value: 53 },
+                { name: '广西壮族自治区', value: 24 },
+                { name: '香港特别行政区', value: 63 },
+                { name: '辽宁省', value: 23 },
+                { name: '河南省', value: 376 },
+                { name: '上海市', value: 237 },
+                { name: '广东省', value: 164 },
+                { name: '黑龙江省', value: 56 },
+                { name: '山东省', value: 96 },
+                { name: '四川省', value: 34 },
+                { name: '河北省', value: 65 },
+                { name: '天津市', value: 53 },
+                { name: '浙江省', value: 134 },
+                { name: '福建省', value: 76 },
+                { name: '陕西省', value: 52 },
+                { name: '北京市', value: 318 },
+                { name: '吉林省', value: 42 },
+                { name: '江苏省', value: 59 },
+                { name: '山西省', value: 472 },
+                { name: '重庆市', value: 23 },
+                { name: '湖南省', value: 64 },
+                { name: '湖北省', value: 117 },
+                { name: '安徽省', value: 96 },
+                { name: '新疆维吾尔自治区', value: 32 },
+                { name: '江西省', value: 64 },
+                { name: '甘肃省', value: 83 },
+                { name: '海南省', value: 52 },
+                { name: '贵州省', value: 53 },
+                { name: '宁夏回族自治区', value: 42 },
+                { name: '澳门特别行政区', value: 14 },
+                { name: '青海省', value: 28 },
+                { name: '西藏自治区', value: 4 }
+              ],
+            },
+
+            {
+              name: '昆剧',
+              data: [
+                { name: '台湾省', value: 12 },
+                { name: '内蒙古自治区', value: 38 },
+                { name: '云南省', value: 21 },
+                { name: '广西壮族自治区', value: 35 },
+                { name: '香港特别行政区', value: 42 },
+                { name: '辽宁省', value: 13 },
+                { name: '河南省', value: 49 },
+                { name: '上海市', value: 223 },
+                { name: '广东省', value: 103 },
+                { name: '黑龙江省', value: 43 },
+                { name: '山东省', value: 83 },
+                { name: '四川省', value: 38 },
+                { name: '河北省', value: 23 },
+                { name: '天津市', value: 69 },
+                { name: '浙江省', value: 84 },
+                { name: '福建省', value: 75 },
+                { name: '陕西省', value: 53 },
+                { name: '北京市', value: 269 },
+                { name: '吉林省', value: 35 },
+                { name: '江苏省', value: 67 },
+                { name: '山西省', value: 126 },
+                { name: '重庆市', value: 65 },
+                { name: '湖南省', value: 124 },
+                { name: '湖北省', value: 96 },
+                { name: '安徽省', value: 55 },
+                { name: '新疆维吾尔自治区', value: 18 },
+                { name: '江西省', value: 12 },
+                { name: '甘肃省', value: 27 },
+                { name: '海南省', value: 32 },
+                { name: '贵州省', value: 53 },
+                { name: '宁夏回族自治区', value: 15 },
+                { name: '澳门特别行政区', value: 8 },
+                { name: '青海省', value: 11 },
+                { name: '西藏自治区', value: 2 }
+              ],
+            },
+          ]
+        })
+      );
+    });
+
+    myChart.on("click", function (params) {
+      console.log(params);
+      window.location.href = ('Line.html');
+      // 点击事件
+    });
+
+    // 使用刚指定的配置项和数据显示图表   option 表示使用 json 数据格式的配置来绘制图表
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+  </script>
+
+  <script src="Opera/js/Facialmain.js"></script>
+  <script src="City Music/js/aos.js"></script>
+  <script src="City Music/js/main.js"></script>
+</body>
+
+</html>

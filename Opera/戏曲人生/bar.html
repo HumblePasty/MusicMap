@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>京剧演出场数全国各省分布直方图</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<style type="text/css">
+		.demo-chat{width: 50%;margin: 0 auto;}
+	</style>
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>京剧演出场数全国各省分布直方图<span>The number of Peking opera performances is distributed in all provinces of China</span></h1>
+			<div class="htmleaf-links">
+				<a class="htmleaf-icon icon-htmleaf-home-outline" href="index.html" title="戏曲简介" target="_blank"><span>戏曲简介</span></a>
+				<a class="htmleaf-icon icon-htmleaf-arrow-forward-outline" href="http://www.htmleaf.com/jQuery/Chart/201503231564.html" title="返回下载页" target="_blank"><span> 返回下载页</span></a>
+			</div>
+			<div class="htmleaf-demo center">
+			  <a href="line.html">Line Chart</a>
+
+			  <a href="bar.html" class="current">Bar Chart</a>
+			  <a href="doughnut.html">Doughnut Chart</a>
+		
+			
+			  <a href="polar-area.html">Polar Area Chart</a>
+			  <a href="radar.html">Radar Area Chart</a>
+			</div>
+		</header>
+		<div class="htmleaf-content">
+			<div class="demo-chat" >
+				<canvas id="canvas" height="450" width="600"></canvas>
+			</div>
+		</div>
+		
+	</div>
+	
+	<script src="js/Chart.js"></script>
+	<script>
+	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+
+	var barChartData = {
+		labels : ["台湾","内蒙古自治区","云南省","广西壮族自治区","香港","辽宁省","河南省","上海市","广东省","黑龙江省","山东省","四川省","河北省","天津市","浙江省","福建省","陕西省","北京市","吉林省","江苏省","山西省","重庆市","湖南省","湖北省","安徽省","新疆维吾尔自治区","江西省","甘肃省","海南省","贵州省","宁夏回族自治区","澳门","青海省","澳门","西藏自治区"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,0.8)",
+				highlightFill: "rgba(220,220,220,0.75)",
+				highlightStroke: "rgba(220,220,220,1)",
+				data : [154,26,21,34,61,45,276,3927,353,134,213,127,64,4782,315,212,485,5082,123,98,275,553,351,2583,534,382,233,492,132,121,198,241,3985,182]
+			},
+		
+		]
+
+	}
+	window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myBar = new Chart(ctx).Bar(barChartData, {
+			responsive : true
+		});
+	}
+
+	</script>
+
+</body>
+</html>
